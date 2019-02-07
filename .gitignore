@@ -6,8 +6,6 @@ npm-debug.log
 lib-cov
 coverage.html
 selenium-debug.log
-/tests/reports
-/tests/screenshoots
 /features/reports
 phantomjsdriver.log
 tests_output
@@ -16,3 +14,5 @@ tests_output
 \#*
 \.#*
 package-lock.json
+reports
+screenshoots

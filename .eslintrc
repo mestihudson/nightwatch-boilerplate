@@ -16,7 +16,7 @@
     "no-undef": 1,
     "global-strict": 0,
     "no-extra-semi": 1,
-    "indent": ["error", 4],
+    "indent": ["warn", 2],
     "no-underscore-dangle": 0,
     "no-console": 0,
     "no-constant-condition": 0,

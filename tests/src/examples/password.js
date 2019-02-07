@@ -1,23 +1,12 @@
 module.exports = {
-    tags: ['simpletest'],
-    disabled: false,
-
-    'Simple Test for password input field' : function (client) {
-
-        client
-            .url('https://www.myaccount.ubc.ca/myAccount/')
-            .waitForElementVisible('body', 2000);
-
-        client.expect.element('body').to.be.present;
-
-        client.logger('Check Password Input field');
-        client.expect.element('input[name="mainForm:password"]').to.be.visible;
-        client.expect.element('input[name="mainForm:password"]').to.be.a('input');
-        client.expect.element('input[name="mainForm:password"]').to.have.attribute('type').which.equal('password');
-
-
-
-
-
-    }
+  'Eu mesmo fazendo a parada' : function (browser) {
+    const myaccount =  browser.page.myaccount()
+    myaccount.navigate()
+      .assert.title('The University of British Columbia')
+      .assert.visible('@usuario')
+      .setValue('@usuario', 'usuario')
+      .assert.visible('@password')
+      .setValue('@password', 'senha')
+      .click('@login')
+  }
 };
