@@ -6,14 +6,16 @@ module.exports = {
       start_process: false,
       desiredCapabilities: {
         javascriptEnabled: true,
-        acceptSslCerts: true
+        acceptSslCerts: true,
+        handlesAlerts: true,
+        loggingPrefs: { 'browser': 'ALL' }
       },
-			screenshots: {
-				enabled: true,
-				path: 'screenshoots',
-				on_failure: true,
-				on_error: true
-			}
+      screenshots: {
+        enabled: true,
+        path: 'screenshots',
+        on_failure: true,
+        on_error: true
+      }
     },
     firefox: {
       desiredCapabilities: {
@@ -22,7 +24,7 @@ module.exports = {
     },
     chrome: {
       desiredCapabilities: {
-        browserName: 'chrome'
+        browserName: 'chrome',
       }
     }
   }
