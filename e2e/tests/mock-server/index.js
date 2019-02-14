@@ -25,7 +25,9 @@ module.exports = {
     this.server = http.createServer(app)
     this.server
       .listen(configs.port)
-      .on('listening', () => console.log('Server is listening on ', configs.port))
+      .on('listening', () => {
+        console.log('Server is listening on ', configs.port)
+      })
       .on('error', errors => console.error('Error starting server: ', errors))
   },
   stop: function () {
