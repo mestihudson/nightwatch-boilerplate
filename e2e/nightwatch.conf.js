@@ -5,10 +5,10 @@ module.exports = {
       selenium_port: 4444,
       start_process: false,
       desiredCapabilities: {
-        javascriptEnabled: true,
-        acceptSslCerts: true,
+        loggingPrefs: { 'browser': 'ALL' },
         handlesAlerts: true,
-        loggingPrefs: { 'browser': 'ALL' }
+        javascriptEnabled: true,
+        acceptSslCerts: true
       },
       screenshots: {
         enabled: true,

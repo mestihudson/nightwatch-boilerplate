@@ -26,17 +26,14 @@ module.exports = {
     this.server
       .listen(configs.port)
       .on('listening', () => {
-        console.log('Server is listening on ', configs.port)
+        console.log('Server is listening on', configs.port)
       })
-      .on('error', errors => console.error('Error starting server: ', errors))
+      .on('error', errors => console.error('Error starting server:', errors))
   },
   stop: function () {
-    const server = this.server
-    setTimeout(function () {
-      server
-        .close() // Won't accept new connection
-        .on('close', () => console.log('Server stopped'))
-        .on('error', errors => console.log('Error stopping server: ', errors))
-    }, 2000)
+    this.server
+      .close() // Won't accept new connection
+      .on('close', () => console.log('Server stopped'))
+      .on('error', errors => console.log('Error stopping server:', errors))
   }
 }

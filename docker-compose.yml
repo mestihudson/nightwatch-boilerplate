@@ -9,7 +9,8 @@ services:
     ports:
      - '4444:4444'
     networks:
-    - nightwatch
+      nightwatch:
+        ipv4_address: 172.20.0.2
 
   firefox:
     container_name: firefox
@@ -22,7 +23,8 @@ services:
     depends_on:
     - app
     networks:
-    - nightwatch
+      nightwatch:
+        ipv4_address: 172.20.0.3
 
   chrome:
     container_name: chrome
@@ -35,7 +37,8 @@ services:
     depends_on:
     - app
     networks:
-    - nightwatch
+      nightwatch:
+        ipv4_address: 172.20.0.4
 
   app:
     container_name: app
@@ -43,7 +46,7 @@ services:
     environment:
     - HOST=0.0.0.0
     - PORT=4200
-    - VUE_APP_API=http://10.32.0.66:8080/api
+    - VUE_APP_API=http://172.20.0.6:8080/api
     - TZ=BRT2BRST,M11.1.6/23:59:59,M2.3.6/23:59:59
     ports:
     - '4200:4200'
@@ -52,22 +55,24 @@ services:
     working_dir: /ws/app
     entrypoint: /bin/sh -c 'npm install && npm run serve; tail -f /ws/app/package.json'
     networks:
-    - nightwatch
+      nightwatch:
+        ipv4_address: 172.20.0.5
 
   e2e:
     container_name: e2e
     image: node:alpine
     environment:
-    - BASE_URL=http://10.32.0.66:4200/
+    - BASE_URL=http://172.20.0.5:4200/
     - TZ=BRT2BRST,M11.1.6/23:59:59,M2.3.6/23:59:59
     ports:
     - '8080:8080'
     volumes:
     - ./:/ws
     working_dir: /ws/e2e
-    entrypoint: /bin/sh -c 'npm install && npm test; tail -f /ws/e2e/package.json'
+    entrypoint: /bin/sh -c 'npm install; tail -f /ws/e2e/package.json'
     networks:
-    - nightwatch
+      nightwatch:
+        ipv4_address: 172.20.0.6
 
 volumes:
   data:
@@ -76,3 +81,6 @@ volumes:
 networks:
   nightwatch:
     name: nightwatch
+    ipam:
+      config:
+      - subnet: 172.20.0.0/24
