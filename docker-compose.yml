@@ -11,6 +11,11 @@ services:
     networks:
       nightwatch:
         ipv4_address: 172.20.0.2
+    healthcheck:
+      test: '/bin/bash -c "echo -e \"GET / HTTP/1.1\n\n\" > /dev/tcp/localhost/4444 || exit 1"'
+      interval: 10s
+      timeout: 1m30s
+      retries: 5
 
   firefox:
     container_name: firefox
@@ -25,6 +30,11 @@ services:
     networks:
       nightwatch:
         ipv4_address: 172.20.0.3
+    healthcheck:
+      test: '/bin/bash -c "echo -e \"GET / HTTP/1.1\n\n\" > /dev/tcp/localhost/5555 || exit 1"'
+      interval: 10s
+      timeout: 1m30s
+      retries: 5
 
   chrome:
     container_name: chrome
@@ -39,6 +49,11 @@ services:
     networks:
       nightwatch:
         ipv4_address: 172.20.0.4
+    healthcheck:
+      test: '/bin/bash -c "echo -e \"GET / HTTP/1.1\n\n\" > /dev/tcp/localhost/5555 || exit 1"'
+      interval: 10s
+      timeout: 1m30s
+      retries: 5
 
   app:
     container_name: app
@@ -57,6 +72,11 @@ services:
     networks:
       nightwatch:
         ipv4_address: 172.20.0.5
+    healthcheck:
+      test: 'echo -e "GET / HTTP/1.1\n\n" | nc localhost 4200'
+      interval: 10s
+      timeout: 10m
+      retries: 5
 
   e2e:
     container_name: e2e
@@ -69,10 +89,19 @@ services:
     volumes:
     - ./:/ws
     working_dir: /ws/e2e
-    entrypoint: /bin/sh -c 'npm install; tail -f /ws/e2e/package.json'
+    entrypoint: /bin/sh -c 'npm install && npm test; tail -f /ws/e2e/package.json'
     networks:
       nightwatch:
         ipv4_address: 172.20.0.6
+    depends_on:
+      hub:
+        condition: service_healthy
+      firefox:
+        condition: service_healthy
+      chrome:
+        condition: service_healthy
+      app:
+        condition: service_healthy
 
 volumes:
   data:
