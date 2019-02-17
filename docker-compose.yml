@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3.6'
 
 services:
   hub:
@@ -57,18 +57,21 @@ services:
 
   app:
     container_name: app
-    image: node:alpine
+    image: maven:3.6.0-jdk-8-alpine
     environment:
-    - HOST=0.0.0.0
-    - PORT=4200
     - VUE_APP_API=http://172.20.0.6:8080/api
     - TZ=BRT2BRST,M11.1.6/23:59:59,M2.3.6/23:59:59
     ports:
     - '4200:4200'
     volumes:
-    - ./:/ws
+    - type: bind
+      source: ./
+      target: /ws
+    - type: bind
+      source: $HOME/.m2
+      target: /root/.m2
     working_dir: /ws/app
-    entrypoint: /bin/sh -c 'npm install && npm run serve; tail -f /ws/app/package.json'
+    entrypoint: /bin/sh -c 'mvn; tail -f /ws/docker-compose.yml'
     networks:
       nightwatch:
         ipv4_address: 172.20.0.5
@@ -94,14 +97,10 @@ services:
       nightwatch:
         ipv4_address: 172.20.0.6
     depends_on:
-      hub:
-        condition: service_healthy
-      firefox:
-        condition: service_healthy
-      chrome:
-        condition: service_healthy
-      app:
-        condition: service_healthy
+    - hub
+    - firefox
+    - chrome
+    - app
 
 volumes:
   data:
