@@ -1,24 +1,28 @@
 <template lang='pug'>
-  #app
-    h1 App
-    hello-world(:message='message')
+#app
+  #nav
+    router-link(to='/') Home
+    span |
+    router-link(to='/about') About
+  router-view
 </template>
 
-<script>
-import HelloWorld from '@/components/HelloWorld'
-import api from '@/services/api'
-
-export default {
-  components: { HelloWorld },
-  created () {
-    api.getMessage()
-      .then(response => {
-        this.message = response.message
-      })
-      .catch(errors => console.error(errors))
-  },
-  data () {
-    return { message: '' }
+<style lang='scss'>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+#nav {
+  padding: 30px;
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+    &.router-link-exact-active {
+      color: #42b983;
+    }
   }
 }
-</script>
+</style>
