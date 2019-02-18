@@ -22,18 +22,15 @@ module.exports = {
     mock.stop()
   },
   'Entrar': (browser) => {
-    mock.start({
-      port: 8080,
-      routes: [
-        {
-          method: 'get',
-          url: '/message',
-          handler: function(request, response) {
-            response.json({ message: 'Smoke on the Water!' })
+    mock
+      .start()
+      .reset({
+        routes: {
+          '/api': {
+            'get:/message': (q, s) => s.json({ message: 'Smoke on the Water!' })
           }
         }
-      ]
-    })
+      })
     browser
       .url(BASE_URL)
       .verify.titleContains('App - Título')

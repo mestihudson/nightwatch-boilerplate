@@ -3,8 +3,11 @@
   "scripts": {
     "cleanup": "rm -frv tests/reports/* tests/screenshots/*",
     "test:lint": "eslint ./tests --max-warnings 0 --fix",
-    "test:e2e": "(cd tests && nightwatch --env chrome,firefox)",
-    "test": "npm run cleanup && npm run test:lint && npm run test:e2e"
+    "test:e2e:firefox": "(cd tests && nightwatch --env firefox)",
+    "test:e2e:chrome": "(cd tests && nightwatch --env chrome)",
+    "test:e2e": "npm run test:e2e:firefox && npm run test:e2e:chrome",
+    "test:unit": "echo 'unit tests...'",
+    "test": "npm run cleanup && npm run test:lint && npm run test:unit && npm run test:e2e"
   },
   "devDependencies": {
     "body-parser": "^1.18.3",
