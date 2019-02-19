@@ -3,15 +3,15 @@ const mock = require('../mock-server')
 const BASE_URL = process.env.BASE_URL
 
 module.exports = {
-  beforeEach: (browser) => {
+  beforeEach: function(browser) {
     browser
       .getLogTypes(function(result) {
         console.log(result)
-        browser
+        return browser
       })
       .getLog('browser', function(result) {
         console.log(result)
-        browser
+        return browser
       })
       .source(function (result) {
         console.log(result)

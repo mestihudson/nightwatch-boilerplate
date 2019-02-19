@@ -1,24 +1,28 @@
-<template lang='pug'>
-  #app
-    h1 App
-    hello-world(:message='message')
+<template>
+  <div id="app">
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld'
-import api from '@/services/api'
+import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  components: { HelloWorld },
-  created () {
-    api.getMessage()
-      .then(response => {
-        this.message = response.message
-      })
-      .catch(errors => console.error(errors))
-  },
-  data () {
-    return { message: '' }
+  name: 'app',
+  components: {
+    HelloWorld
   }
 }
 </script>
+
+<style lang="scss">
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>

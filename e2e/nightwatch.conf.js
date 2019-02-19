@@ -1,4 +1,9 @@
 module.exports = {
+  src_folders : ['tests/specs'],
+  output_folder : 'tests/reports',
+  globals_path : 'tests/globals.js',
+  custom_commands_path : 'tests/custom-commands',
+  page_objects_path : 'tests/page-objects',
   test_settings: {
     default: {
       selenium_host: 'hub',
@@ -12,7 +17,7 @@ module.exports = {
       },
       screenshots: {
         enabled: true,
-        path: 'screenshots',
+        path: 'tests/screenshots',
         on_failure: true,
         on_error: true
       }

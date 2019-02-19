@@ -6,19 +6,34 @@ npm-debug.log
 lib-cov
 coverage.html
 selenium-debug.log
-/features/reports
 phantomjsdriver.log
 tests_output
-/features/report
 *~
 \#*
 \.#*
-package-lock.json
-reports
-screenshoots
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
 .DS_Store
 node_modules
 /dist
+reports
+screenshots
 
 # local env files
 .env.local

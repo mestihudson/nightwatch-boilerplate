@@ -1,20 +1,17 @@
 {
-  "name": "nightwatch-minimal-config",
+  "name": "e2e",
   "scripts": {
-    "cleanup": "rm -frv tests/reports/* tests/screenshots/*",
+    "cleanup": "rm -frv tests/{reports,screenshots}",
     "test:lint": "eslint ./tests --max-warnings 0 --fix",
-    "test:e2e:firefox": "(cd tests && nightwatch --env firefox)",
-    "test:e2e:chrome": "(cd tests && nightwatch --env chrome)",
-    "test:e2e": "npm run test:e2e:firefox && npm run test:e2e:chrome",
-    "test:unit": "echo 'unit tests...'",
-    "test": "npm run cleanup && npm run test:lint && npm run test:unit && npm run test:e2e"
+    "test:e2e": "nightwatch",
+    "test": "npm run cleanup && npm run test:lint && npm run test:e2e"
   },
   "devDependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
-    "eslint": "^5.13.0",
+    "eslint": "^5.14.1",
     "express": "^4.16.4",
-    "nightwatch": "^1.0.18",
+    "nightwatch": "^1.0.19",
     "nightwatch-html-reporter": "^2.0.6"
   },
   "bin": {

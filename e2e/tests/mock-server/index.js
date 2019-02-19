@@ -43,7 +43,7 @@ module.exports = {
         const routes = config.routes[uri]
         for (const key in routes) {
           if (routes.hasOwnProperty(key)) {
-            const [ method, uri ] = key.split(':')
+            const [method, uri] = key.split(':')
             const handler = routes[key]
             router[method](uri, handler)
           }
