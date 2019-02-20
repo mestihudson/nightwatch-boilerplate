@@ -3,31 +3,19 @@ const mock = require('../mock-server')
 const BASE_URL = process.env.BASE_URL
 
 module.exports = {
-  beforeEach: function(browser) {
-    browser
-      .getLogTypes(function(result) {
-        console.log(result)
-        return browser
-      })
-      .getLog('browser', function(result) {
-        console.log(result)
-        return browser
-      })
-      .source(function (result) {
-        console.log(result)
-        return browser
-      })
+  beforeEach: () => {
+    mock.start()
   },
   afterEach: () => {
     mock.stop()
   },
   'Entrar': (browser) => {
+    const message = 'Smoke on the Water!'
     mock
-      .start()
       .reset({
         routes: {
           '/api': {
-            'get:/message': (q, s) => s.json({ message: 'Smoke on the Water!' })
+            'get:/message': (q, s) => s.json({ message })
           }
         }
       })
@@ -35,7 +23,7 @@ module.exports = {
       .url(BASE_URL)
       .verify.titleContains('App - Título')
       .useXpath()
-      .waitForElementVisible('//h3[text()="Smoke on the Water!"]')
+      .waitForElementVisible(`//h3[text()="${message}"]`)
   //   browser
   //     .verify.titleContains('Sistema de Gestão de Riscos e Controles Internos')
   //     .useCss()

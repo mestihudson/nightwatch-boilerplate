@@ -5,22 +5,20 @@
 </template>
 
 <script>
-import axios from 'axios'
-
+import api from '@/services/api'
 import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   components: { HelloWorld },
   created () {
-    axios.get(`${process.env.API}/message`)
+    api.getMessage()
       .then(response => {
-        console.log(response)
         this.message = response.message
       })
       .catch(errors => console.error(errors))
   },
   data () {
-    return { message: 'Smoke on the Water!' }
+    return { message: '' }
   }
 }
 </script>
