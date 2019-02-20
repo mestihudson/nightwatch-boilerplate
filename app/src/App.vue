@@ -2,26 +2,25 @@
   #app
     h1 App
     hello-world(:message='message')
-  </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 import HelloWorld from '@/components/HelloWorld.vue'
-import api from '@/services/api'
 
 export default {
   components: { HelloWorld },
   created () {
-    api.getMessage()
+    axios.get(`${process.env.API}/message`)
       .then(response => {
+        console.log(response)
         this.message = response.message
       })
       .catch(errors => console.error(errors))
   },
   data () {
-    return {
-      message: ''
-    }
+    return { message: 'Smoke on the Water!' }
   }
 }
 </script>
