@@ -3,6 +3,7 @@ const mock = require('../mock-server')
 const BASE_URL = process.env.BASE_URL
 
 module.exports = {
+  '@disabled': true,
   beforeEach: () => {
     mock.start()
   },
