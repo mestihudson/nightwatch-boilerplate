@@ -1,5 +1,9 @@
 const mock = require('../mock-server')
 const BASE_URL = process.env.BASE_URL
+const fixtures = {
+	EMPRESTEI: 'Emprestei',
+  USUARIOS: 'Leitores'
+}
 
 module.exports = {
   beforeAll: () => {
@@ -8,13 +12,13 @@ module.exports = {
   afterAll: () => {
     mock.stop()
   },
-  beforeEach: (browser) => {},
   'Entrar': (browser) => {
     browser
       .url(BASE_URL)
-      .verify.titleContains('Emprestei')
+      .verify.titleContains(`${fixtures.EMPRESTEI}`)
       .useXpath()
-      .waitForElementVisible(`//a[text()='Usuários']`)
+      .waitForElementVisible(`//h1[text()='${fixtures.EMPRESTEI}']`)
+      .waitForElementVisible(`//a[text()='${fixtures.USUARIOS}']`)
       .waitForElementVisible(`//a[text()='Livros']`)
       .waitForElementVisible(`//a[text()='Empréstimos']`)
   },
@@ -22,8 +26,8 @@ module.exports = {
     browser
       .url(BASE_URL)
       .useXpath()
-      .waitForElementVisible(`//a[text()='Usuários']`)
-      .click(`//a[text()='Usuários']`)
-      .waitForElementVisible(`//h3[text()='Usuários']`)
+      .waitForElementVisible(`//a[text()='${fixtures.USUARIOS}']`)
+      .click(`//a[text()='${fixtures.USUARIOS}']`)
+      .waitForElementVisible(`//h3[text()='${fixtures.USUARIOS}']`)
   }
 }

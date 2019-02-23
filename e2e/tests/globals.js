@@ -17,17 +17,17 @@ module.exports = {
   beforeEach: (browser, done) => {
     const logOn = false
     browser
-      .getLogTypes(function(result) {
+      .getLogTypes((result) => {
         if (logOn)
           console.log(result)
         return browser
       })
-      .getLog('browser', function(result) {
+      .getLog('browser', (result) => {
         if (logOn)
           console.log(result)
         return browser
       })
-      .source(function (result) {
+      .source((result) => {
         if (logOn)
           console.log(result)
         return browser
