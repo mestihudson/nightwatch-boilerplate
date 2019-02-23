@@ -1,3 +1,3 @@
 <template lang='pug'>
-div.usuarios: h3 Usuários
+div.leitores: h3 Leitores
 </template>
