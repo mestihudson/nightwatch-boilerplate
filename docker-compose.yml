@@ -89,8 +89,8 @@ services:
     - '8080:8080'
     volumes:
     - ./:/ws
-    working_dir: /ws/e2e
-    entrypoint: /bin/sh -c 'npm install; tail -f /ws/docker-compose.yml'
+    working_dir: /ws/cucumber
+    entrypoint: /bin/sh -c 'npm install && browser=firefox,chrome npm run cucumber; tail -f /ws/docker-compose.yml'
     networks:
       nightwatch:
         ipv4_address: 172.20.0.6
