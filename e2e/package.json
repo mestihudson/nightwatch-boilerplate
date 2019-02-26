@@ -1,23 +1,23 @@
 {
   "name": "e2e",
   "scripts": {
-    "cucumber": "cucumber-js",
+    "cucumber": "cucumber-js --require cucumber.conf.js --require step-definitions --format node_modules/cucumber-pretty --require-module babel-core/register",
     "cleanup": "rm -frv tests/{reports,screenshots}",
     "test:lint": "eslint ./tests --max-warnings 0 --fix",
     "test:e2e": "nightwatch",
     "test": "npm run cleanup && npm run test:lint && npm run test:e2e"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
     "body-parser": "^1.18.3",
-    "chai": "^4.2.0",
     "cors": "^2.8.5",
     "cucumber": "^5.1.0",
     "cucumber-pretty": "^1.5.0",
-    "eslint": "^5.14.1",
     "express": "^4.16.4",
     "nightwatch": "^1.0.19",
-    "nightwatch-html-reporter": "^2.0.6",
-    "selenium-webdriver": "^4.0.0-alpha.1"
+    "nightwatch-api": "^2.1.1"
   },
   "bin": {
     "nightwatch": "./node_modules/nightwatch/bin/nightwatch"

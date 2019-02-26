@@ -1,24 +1,30 @@
-const { Given, When, Then } = require('cucumber')
-const { expect } = require('chai')
-// const Principal = require('./pages/Principal')
-function Principal () {}
-Principal.prototype.titulo = function () {
-  return 'Emprestei'
-}
+import { client } from 'nightwatch-api'
+import { Given, When, Then, BeforeAll, AfterAll } from 'cucumber'
+import mock from '../tests/mock-server'
 
-Given(/^eu sou um usuário comum$/, async () => {
-  // const driver = new Builder()
-  try {
-    const page = Principal()
-    expect(page.titulo()).to.be('Emprestei')
-    // await driver.get(process.env.BASE_URL)
-    // const title = await driver.getTitle()
-    // console.log(title)
-  } catch (e) {
-    throw new Error(e)
-  }
+BeforeAll(async () => {
+	mock.start()
 })
 
-When(/^eu entro$/, () => 'pending')
+AfterAll(async () => {
+	mock.stop()
+})
 
-Then(/^eu visualizo as seguintes opções$/, () => 'pending')
+Given(/^eu sou um usuário comum$/, async () => {
+	mock.reset({
+		routes: []
+	})
+})
+
+When(/^eu entro$/, async () => {
+	await client
+		.url(process.env.BASE_URL)
+})
+
+Then(/^eu visualizo as seguintes opções$/, async () => {
+  await client
+    .assert.titleContains('Emprestei')
+    .waitForElementVisible(`//a[text()='Usuários']`)
+    .waitForElementVisible(`//a[text()='Livros']`)
+    .waitForElementVisible(`//a[text()='Empréstimos']`)
+})

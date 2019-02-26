@@ -4,11 +4,16 @@ module.exports = {
   globals_path : 'tests/globals.js',
   custom_commands_path : 'tests/custom-commands',
   page_objects_path : 'tests/page-objects',
+  use_xpath: true,
+  detailed_output: false,
   test_settings: {
     default: {
       selenium_host: 'hub',
       selenium_port: 4444,
       start_process: false,
+      log_path: "logs",
+      silent: true,
+      live_output: false,
       desiredCapabilities: {
         loggingPrefs: { 'browser': 'ALL' },
         handlesAlerts: true,
