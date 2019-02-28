@@ -68,7 +68,7 @@ services:
     volumes:
     - ./:/ws
     working_dir: /ws/app
-    entrypoint: /bin/sh -c 'npm install && npm run serve; tail -f /ws/docker-compose.yml'
+    entrypoint: /bin/sh -c 'yarn install && yarn start; tail -f /ws/docker-compose.yml'
     networks:
       nightwatch:
         ipv4_address: 172.20.0.5
