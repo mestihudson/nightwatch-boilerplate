@@ -1,6 +1,7 @@
-Feature: Entrar
+# language: pt
+Funcionalidade: Entrar
 
-  Scenario: Padrão
-    Given eu sou um usuário comum
-    When eu entro
-    Then eu visualizo as seguintes opções
+  Cenário: Padrão
+    Dado eu sou um usuário comum
+    Quando eu entro
+    Então eu visualizo as seguintes opções

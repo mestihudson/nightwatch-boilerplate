@@ -17,7 +17,8 @@
     "cucumber-pretty": "^1.5.0",
     "express": "^4.16.4",
     "nightwatch": "^1.0.19",
-    "nightwatch-api": "^2.1.1"
+    "nightwatch-api": "^2.1.1",
+    "nightwatch-html-reporter": "^2.0.6"
   },
   "bin": {
     "nightwatch": "./node_modules/nightwatch/bin/nightwatch"
